@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div style="margin-left:20px; margin-top:20px">
+    <h1>Author List</h1>
+
+    {% if author_list %}
+    <ul>
+        {% for author in author_list %}
+        <li>
+            <a href="{{ author.get_absolute_url }}">{{ author.last_name }}, {{ author.first_name }}</a>
+            ({{ author.date_of_birth }} - {{ author.date_of_death }})
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are not a author in the library.</p>
+    {% endif %}
+    </div>
+    {% buttons %}
+        <a class="btn btn-primary" href="{% url 'author-create' %}" role="button">Autor create</a>
+    {% endbuttons %}
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% block title %}
+        <title>Library project</title>
+        {% endblock %}
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-sm-2 -none d-md-block bg-light sidebar">
+                    {% block sidebar %}
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'books' %}">All books</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'authors' %}">All authors</a></li>
+
+                        <div>
+                            <hr>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link">User: {{ user.get_username }}</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'my-borrowed' %}">My borrowed</a></li>
+                            {% if perms.catalog.can_mark_returned %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next=/catalog/">Logout</a></li>
+                                <div>
+                                    <hr>
+                                    <li class="nav-item"><a class="nav-link">Staff</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'all-borrowed' %}">All borrowed</a></li>
+                                </div>
+                           {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
+                            {% endif %}
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                       {% endif %}
+                        </div>
+                     </ul>
+                    {% endblock %}
+                </nav>
+                <div class="col-sm-10">
+                    {% block content %}
+                    {% endblock %}
+
+                    {% block pagination %}
+                        {% if is_paginated %}
+                            <div class="pagination">
+                                <span class="page-links">
+                                    {% if page_obj.has_previous %}
+                                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                                    {% endif %}
+                                    <span class="page-current">
+                                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                    </span>
+                                   {% if page_obj.has_next %}
+                                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

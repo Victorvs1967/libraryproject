@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div style="margin-left:20px; margin-top:20px">
+    <p>Logged out!</p>
+
+    <a href="{% url 'login' %}">Click here to login again.</a>
+</div>
+{% endblock %}

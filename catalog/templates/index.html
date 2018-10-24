@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="margin-left:20px; margin-top:20px">
+
+    <h1>Library Project</h1>
+    <p>Welcome to <em>LibraryProject</em>, a very basic Django website developed as a tutorial example.</p>
+
+    <h2>Dinamic content</h2>
+
+    <p>The library has the following records count:</p>
+    <ul>
+        <li><strong>Books: </strong>{{ num_books }}</li>
+        <li><strong>Copies: </strong>{{ num_instances }}</li>
+        <li><strong>Copies available: </strong>{{ num_instances_available }}</li>
+        <li><strong>Authors: </strong>{{ num_authors }}</li>
+    </ul>
+
+    <p>You have visited this site {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+    </div>
+{% endblock %}

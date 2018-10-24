@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div style="margin-left:20px; margin-top:20px">
+
+    <h1>Renew: {{ bookinst.book.title }}</h1>
+    <p>Borrower: {{ bookinst.borrower }}</p>
+    <p class="{% if bookinst.is_overdue %}text-danger{% endif %}">Due date: {{ bookinst.due_back }}</p>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
+    </form>
+</div>
+{% endblock %}

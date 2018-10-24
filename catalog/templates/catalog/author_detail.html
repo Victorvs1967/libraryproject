@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div style="margin-left:20px; margin-top:20px">
+    <h1>Author: {{ author.last_name }}, {{ author.first_name }}</h1>
+
+    <p>{{ author.date_of_birth }} - {{ author.date_of_death }}</p>
+
+    {% buttons %}
+        <a class="btn btn-primary" href="{% url 'author-update' author.pk %}" role="button">Author update</a>
+        <a class="btn btn-danger" href="{% url 'author-delete' author.pk %}" role="button">Author delete</a>
+    {% endbuttons %}
+
+    <div style="margin-left:20px; margin-top:20px">
+        <h4>Books</h4>
+
+        {% for book in author.book_set.all %}
+            <hr>
+            <a href="{% url 'book-detail' book.author.pk %}">{{ book.title }}</a>
+            <p>{{ book.summary }}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <div style="margin-left:20px; margin-top:20px">
+        <h1>Delete Author</h1>
+
+        <p>Are you sure you want to delete the author: {{ author }}?</p>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Yes, delete.</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
