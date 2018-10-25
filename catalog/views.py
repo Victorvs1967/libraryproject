@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404
@@ -12,7 +12,6 @@ from .forms import RenewBookModelForm
 from .models import Book, Author, BookInstance, Genre, Language
 
 # Create your views here.
-@login_required
 def index(request):
     """
 
