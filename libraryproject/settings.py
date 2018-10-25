@@ -20,12 +20,10 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'r*^m@bb51$e^ld!*iw)l2q67zw-0)9&*u+&t&n=9^kj@n=l4f('
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'r*^m@bb51$e^ld!*iw)l2q67zw-0)9&*u+&t&n=9^kj@n=l4f(')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['my-library-project.herokuapp.com', '127.0.0.1', '0.0.0.0']
@@ -128,12 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-LOGIN_REDIRECT_URL = ''
-
+LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
