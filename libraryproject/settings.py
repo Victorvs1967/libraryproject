@@ -24,8 +24,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'r*^m@bb51$e^ld!*iw)l2q67zw-0)9
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = False
+# DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['my-library-project.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
@@ -128,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 LOGIN_REDIRECT_URL = '/'
 
